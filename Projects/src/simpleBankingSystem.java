@@ -1,43 +1,33 @@
+import jdk.dynalink.NamedOperation;
+
 import java.util.Scanner;
 
 public class simpleBankingSystem {
-    public static void main(String[] args){
+    public static void main(String[] args) {
 
         Scanner scanner = new Scanner(System.in);
+        Account createAccount = new Account(scanner);
+        BankActivities activities = new BankActivities(scanner);
 
         String firstName;
         String lastName;
-        String PIN;
-        double balance;
-        boolean isExist;
         String response;
+        int pin;
+        double balance;
+        double amount;
+        boolean isExist;
 
         System.out.print("Do you have an account in our bank?: ");
-        response = scanner.nextLine().toLowerCase();
+        response = scanner.nextLine();
+
         if(response.equals("no")){
-            System.out.print("Would you like to create an account?: ");
-            String userResponse = scanner.nextLine().toLowerCase();
-            if(userResponse.equals("yes")){
-                System.out.print("Enter your firstName: ");
-                firstName = scanner.nextLine();
+            System.out.print("Would you like to create one: ");
+            response = scanner.nextLine();
+            if(response.equals("yes")){
+                createAccount.basic();
 
-                System.out.print("Enter your last Name: ");
-                lastName = scanner.nextLine();
-
-                System.out.print("Set your pin: ");
-                PIN = scanner.nextLine();
-
-                CreateAccount account = new CreateAccount(firstName,lastName,PIN,scanner);
-                account.displayAndDepositMessage();
             }
         }
-
-
-
-
-
-
-
 
     }
 }
