@@ -1,19 +1,17 @@
 import  java.util.Scanner;
 public class Account {
 
-
-
     String response;
     String firstName;
     String lastName;
     int pin;
-    private Scanner scanner;
-    double amount;
-    private BankActivities b;
+    private final Scanner scanner;
+    double balance;
+    private final BankActivities b;
 
     public Account( Scanner scanner){
         this.scanner = scanner;
-        this.b = new BankActivities(scanner);
+        this.b = new BankActivities(scanner, 0);
     }
 
     public void basic(){
@@ -27,24 +25,12 @@ public class Account {
         pin = scanner.nextInt();
 
         System.out.println("You have created your account.");
-        System.out.print("Would you like to deposit money?: ");
-        scanner.nextLine();
-        response = scanner.nextLine();
-
-
-        if(response.equals("no")){
-            System.out.print("Thanks for creating your account ");
-        }
-        else {
-            b.deposit();
-        }
-
+        System.out.println("Please deposit minimum of Rs.1000.");
+        b.deposit();
     }
 
-
-
-
-
-
+    public  BankActivities getBankActivities(){
+        return  b;
+    }
 }
 

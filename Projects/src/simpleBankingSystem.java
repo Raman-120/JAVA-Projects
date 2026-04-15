@@ -1,5 +1,3 @@
-import jdk.dynalink.NamedOperation;
-
 import java.util.Scanner;
 
 public class simpleBankingSystem {
@@ -7,15 +5,9 @@ public class simpleBankingSystem {
 
         Scanner scanner = new Scanner(System.in);
         Account createAccount = new Account(scanner);
-        BankActivities activities = new BankActivities(scanner);
 
-        String firstName;
-        String lastName;
         String response;
-        int pin;
-        double balance;
-        double amount;
-        boolean isExist;
+
 
         System.out.print("Do you have an account in our bank?: ");
         response = scanner.nextLine();
@@ -25,7 +17,9 @@ public class simpleBankingSystem {
             response = scanner.nextLine();
             if(response.equals("yes")){
                 createAccount.basic();
-
+                BankActivities activities = createAccount.getBankActivities();
+                activities.Menu();
+                activities.action();
             }
         }
 
