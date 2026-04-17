@@ -1,7 +1,8 @@
 import  java.util.Scanner;
 public class Account {
 
-    String response;
+    String username;
+    int Pin;
     String firstName;
     String lastName;
     int pin;
@@ -9,7 +10,7 @@ public class Account {
     double balance;
     private final BankActivities b;
 
-    public Account( Scanner scanner){
+    public Account(Scanner scanner){
         this.scanner = scanner;
         this.b = new BankActivities(scanner, 0);
     }
@@ -27,6 +28,21 @@ public class Account {
         System.out.println("You have created your account.");
         System.out.println("Please deposit minimum of Rs.1000.");
         b.deposit();
+    }
+
+    public void alreadyExist(){
+        System.out.print("Enter your username: ");
+        username = scanner.nextLine();
+        System.out.print("Enter your password: ");
+        pin = scanner.nextInt();
+    }
+
+    public String getUsername(){
+        return username;
+    }
+
+    public int getPin(){
+        return pin;
     }
 
     public  BankActivities getBankActivities(){

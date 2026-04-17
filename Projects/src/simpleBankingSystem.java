@@ -4,9 +4,14 @@ public class simpleBankingSystem {
     public static void main(String[] args) {
 
         Scanner scanner = new Scanner(System.in);
-        Account createAccount = new Account(scanner);
+        Account account = new Account(scanner);
+        BankActivities activities = account.getBankActivities();
 
         String response;
+        double balance = 50000;
+        String username = "raman";
+        int pin= 455;
+
 
 
         System.out.print("Do you have an account in our bank?: ");
@@ -16,11 +21,23 @@ public class simpleBankingSystem {
             System.out.print("Would you like to create one: ");
             response = scanner.nextLine();
             if(response.equals("yes")){
-                createAccount.basic();
-                BankActivities activities = createAccount.getBankActivities();
+                account.basic();
                 activities.Menu();
                 activities.action();
             }
+        }
+        else{
+            account.alreadyExist();
+            if(username.equals(account.getUsername()) && pin == account.getPin()){
+                activities.setBalance(balance);
+                activities.Menu();
+                activities.action();
+
+            }
+            else {
+                System.out.println("Incorrect username or password.");
+            }
+
         }
 
     }

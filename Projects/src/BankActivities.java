@@ -14,6 +14,10 @@ public class BankActivities{
         this.balance = balance;
     }
 
+    public double setBalance(double balance) {
+        return this.balance = balance;
+    }
+
     public void Menu(){
         System.out.println("1.Check Balance");
         System.out.println("2.Withdraw");
