@@ -14,8 +14,8 @@ public class BankActivities{
         this.balance = balance;
     }
 
-    public double setBalance(double balance) {
-        return this.balance = balance;
+    public void setBalance(double balance) {
+        this.balance = balance;
     }
 
     public void Menu(){
@@ -23,7 +23,8 @@ public class BankActivities{
         System.out.println("2.Withdraw");
         System.out.println("3.Deposit Money");
         System.out.println("4.Money Transfer");
-        System.out.println("5.Exit");
+        System.out.println("5.Interest Calculation");
+        System.out.println("6.Exit");
     }
 
     public void action(){
@@ -35,7 +36,8 @@ public class BankActivities{
             case 2 -> withdraw();
             case 3 -> deposit();
             case 4 -> MoneyTransfer();
-            case 5 -> System.exit(0);
+            case 5 -> InterestCalculator();
+            case 6 -> System.exit(0);
             default -> System.out.println("Invalid Choice");
         }
     }
@@ -74,4 +76,24 @@ public class BankActivities{
         System.out.println("Your new balance is " + balance);
     }
 
+    public void InterestCalculator(){
+        double loanAmount = 0;
+        System.out.println("1. Simple Interest on loan");
+        System.out.println("2. Simple Interest on saving");
+        System.out.print("Enter your choice: ");
+        response = scanner.nextInt();
+        if(response == 1){
+            System.out.print("Enter your loan amount: ");
+            loanAmount = scanner.nextDouble();
+            amount = (double) 10 / 100 * loanAmount;
+            System.out.println("Your interest amount is " + amount);
+        }
+        else if(response == 2){
+            amount =(double) 8 / 100 * balance;
+            System.out.println("Your interest amount is " + amount);
+        }
+        else {
+            System.out.println("Invalid choice.");
+        }
+    }
 }

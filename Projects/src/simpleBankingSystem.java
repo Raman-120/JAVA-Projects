@@ -13,7 +13,6 @@ public class simpleBankingSystem {
         int pin= 455;
 
 
-
         System.out.print("Do you have an account in our bank?: ");
         response = scanner.nextLine();
 
