@@ -35,7 +35,7 @@ public class BankActivities{
             case 1 -> System.out.println("Your balance is " + checkBalance());
             case 2 -> withdraw();
             case 3 -> deposit();
-            case 4 -> MoneyTransfer();
+            case 4 -> moneyTransfer();
             case 5 -> InterestCalculator();
             case 6 -> System.exit(0);
             default -> System.out.println("Invalid Choice");
@@ -49,31 +49,41 @@ public class BankActivities{
     public void withdraw(){
         System.out.println("Enter the amount you want to withdraw: ");
         amount = scanner.nextDouble();
-        balance -= amount;
-        System.out.println("You have successfully withdrawn " + amount);
-        System.out.println("Your new balance is " + balance);
-    }
-
-    public void deposit(){
-        System.out.println("Enter the amount you want to deposit: ");
-        amount = scanner.nextDouble();
-        if(amount < 1000){
-            System.out.println("Minimum deposit of Rs.1000 \n please try again!");
+        if(balance < amount){
+            System.out.println("Insufficient Balance!");
         }
-        else {
-            balance += amount;
-            System.out.println("You have successfully deposited " + amount);
+        else{
+            balance -= amount;
+            System.out.println("You have successfully withdrawn " + amount);
             System.out.println("Your new balance is " + balance);
         }
 
     }
 
-    public void MoneyTransfer(){
+    public void deposit(){
+        System.out.println("Enter the amount you want to deposit: ");
+        amount = scanner.nextDouble();
+        while (amount < 1000){
+            System.out.println("Minimum deposit of Rs.1000 \n please try again!");
+        }
+
+        balance += amount;
+        System.out.println("You have successfully deposited " + amount);
+        System.out.println("Your new balance is " + balance);
+    }
+
+    public void moneyTransfer(){
         System.out.println("Enter the amount ");
         amount = scanner.nextDouble();
-        balance -= amount;
-        System.out.println("You have successfully transferred " + amount);
-        System.out.println("Your new balance is " + balance);
+        if(balance < amount){
+            System.out.println("Insufficient Balance!");
+        }
+        else{
+            balance -= amount;
+            System.out.println("You have successfully transferred " + amount);
+            System.out.println("Your new balance is " + balance);
+        }
+
     }
 
     public void InterestCalculator(){

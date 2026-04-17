@@ -2,12 +2,10 @@ import  java.util.Scanner;
 public class Account {
 
     String username;
-    int Pin;
     String firstName;
     String lastName;
     int pin;
     private final Scanner scanner;
-    double balance;
     private final BankActivities b;
 
     public Account(Scanner scanner){
