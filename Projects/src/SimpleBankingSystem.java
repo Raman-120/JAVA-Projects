@@ -1,57 +1,77 @@
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.Scanner;
-import java.io.FileWriter;
 import java.util.InputMismatchException;
+import java.io.DataInputStream;
+import java.io.FileInputStream;
+
 
 public class SimpleBankingSystem {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
 
         Scanner scanner = new Scanner(System.in);
         Account account = new Account(scanner);
         BankActivities activities = account.getBankActivities();
+        account.openFile();
+        DataInputStream dis = new DataInputStream(new FileInputStream("data.bin"));
 
+        // for demo to use as an existing account
         String response;
-        double balance = 50000;
-        String username = "raman";
-        int pin= 455;
+        String storedUsername = dis.readUTF();
+        double balance = 0;
+        String username = account.getUsername();
+        int pin = account.getPin();
+        int storedPin = dis.readInt();
+        boolean isLogin = false;
 
-        System.out.print("Do you have an account in our bank?: ");
-        response = scanner.nextLine();
+        try {
+            System.out.print("Do you have an account in our bank?: ");
+            response = scanner.nextLine();
 
 
-            if(response.equals("no")){
+            if (response.equals("no")) {
                 System.out.print("Would you like to create one: ");
                 response = scanner.nextLine();
-                if(response.equals("yes")){
+
+                if (response.equals("yes")) {
                     account.basic();
-                }
-                else {
+                    account.alreadyExist();
+                    account.deposit();
+                    isLogin = true;
+                } else {
                     System.out.println("Thanks for visiting our site.");
                     System.exit(0);
                 }
-            }
-            else if(response.equals("yes")){
+            } else if (response.equals("yes")) {
+
                 account.alreadyExist();
-                if(username.equals(account.getUsername()) && pin == account.getPin()){
-                    activities.setBalance(balance);
-
+                try{
+                    if (username.equals(storedUsername) && pin == storedPin) {
+                        activities.setBalance(balance);
+                        isLogin = true;
+                    } else {
+                        System.out.println("Incorrect username or password.");
+                    }
+                }catch (NullPointerException e){
+                    System.out.println("Could't locate.");
                 }
-                else {
-                    System.out.println("Incorrect username or password.");
-                }
 
-            }
-            else{
+
+            } else {
                 System.out.println("Invalid input.");
                 System.out.println("Please re-run the program again.");
                 System.exit(0);
             }
 
-            while(true){
-                activities.Menu();
-                activities.action();
-            }
+        } catch (InputMismatchException | IOException e) {
+            System.out.println("Invalid input.");
+        }
 
+        while (isLogin) {
+            activities.Menu();
+            activities.action();
+        }
 
-
+        account.closeFile();
     }
 }
