@@ -1,3 +1,4 @@
+import java.io.IOException;
 import  java.util.Scanner;
 public class Account {
 
@@ -26,12 +27,13 @@ public class Account {
         System.out.println("You have created your account.");
         System.out.println("Please deposit minimum of Rs.1000.");
         b.deposit();
+
     }
 
     public void alreadyExist(){
         System.out.print("Enter your username: ");
         username = scanner.nextLine();
-        System.out.print("Enter your password: ");
+        System.out.print("Enter your pin: ");
         pin = scanner.nextInt();
     }
 

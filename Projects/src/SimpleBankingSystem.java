@@ -1,6 +1,8 @@
 import java.util.Scanner;
+import java.io.FileWriter;
+import java.util.InputMismatchException;
 
-public class simpleBankingSystem {
+public class SimpleBankingSystem {
     public static void main(String[] args) {
 
         Scanner scanner = new Scanner(System.in);
@@ -27,7 +29,7 @@ public class simpleBankingSystem {
                     System.exit(0);
                 }
             }
-            else{
+            else if(response.equals("yes")){
                 account.alreadyExist();
                 if(username.equals(account.getUsername()) && pin == account.getPin()){
                     activities.setBalance(balance);
@@ -37,6 +39,11 @@ public class simpleBankingSystem {
                     System.out.println("Incorrect username or password.");
                 }
 
+            }
+            else{
+                System.out.println("Invalid input.");
+                System.out.println("Please re-run the program again.");
+                System.exit(0);
             }
 
             while(true){
